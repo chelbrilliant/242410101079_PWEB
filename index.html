@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Informasi Perpustakaan</title>
+  </head>
+  <body>
+
+    <header>
+      <img src="logo.png" alt="Logo Perpustakaan" width="80" />
+      <h1>Sistem Informasi Perpustakaan</h1>
+      <p>Manajemen Peminjaman dan Pengembalian Buku</p>
+    </header>
+
+    <hr />
+
+    <nav>
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#peminjaman">Peminjaman Buku</a></li>
+        <li><a href="#pengembalian">Pengembalian Buku</a></li>
+        <li><a href="#daftar-buku">Daftar Buku</a></li>
+        <li><a href="#statistik">Statistik</a></li>
+      </ul>
+    </nav>
+
+    <hr />
+
+    <main>
+
+      <!-- Form Peminjaman Buku -->
+      <section id="peminjaman">
+        <h2>Form Peminjaman Buku</h2>
+        <form action="#" method="POST">
+
+          <label for="id-anggota">ID Anggota:</label><br />
+          <input type="text" id="id-anggota" name="id_anggota" /><br /><br />
+
+          <label for="nama-peminjam">Nama Peminjam:</label><br />
+          <input type="text" id="nama-peminjam" name="nama_peminjam" /><br /><br />
+
+          <label for="kode-buku">Kode Buku:</label><br />
+          <input type="text" id="kode-buku" name="kode_buku" /><br /><br />
+
+          <label for="judul-buku">Judul Buku:</label><br />
+          <input type="text" id="judul-buku" name="judul_buku" /><br /><br />
+
+          <label for="kategori-buku">Kategori Buku:</label><br />
+          <select id="kategori-buku" name="kategori_buku">
+            <option value="Fiksi">Fiksi</option>
+            <option value="Non-Fiksi">Non-Fiksi</option>
+            <option value="Ilmu Pengetahuan">Ilmu Pengetahuan</option>
+            <option value="Sejarah">Sejarah</option>
+            <option value="Teknologi">Teknologi</option>
+          </select><br /><br />
+
+          <label for="tanggal-pinjam">Tanggal Pinjam:</label><br />
+          <input type="date" id="tanggal-pinjam" name="tanggal_pinjam" /><br /><br />
+
+          <label for="tanggal-kembali">Tanggal Kembali (Rencana):</label><br />
+          <input type="date" id="tanggal-kembali" name="tanggal_kembali" /><br /><br />
+
+          <label for="jumlah-buku">Jumlah Buku:</label><br />
+          <input type="number" id="jumlah-buku" name="jumlah_buku" min="1" /><br /><br />
+
+          <label for="petugas">Nama Petugas:</label><br />
+          <input type="text" id="petugas" name="petugas" /><br /><br />
+
+          <label for="keterangan">Keterangan:</label><br />
+          <textarea id="keterangan" name="keterangan" rows="4" cols="40"></textarea><br /><br />
+
+          <button type="reset">Batal</button>
+          <button type="submit">Simpan Peminjaman</button>
+        </form>
+      </section>
+
+      <hr />
+
+      <!-- Daftar 5 Peminjaman Terakhir -->
+      <section id="daftar-buku">
+        <h2>Daftar 5 Peminjaman Terakhir</h2>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>ID Anggota</th>
+              <th>Nama Peminjam</th>
+              <th>Judul Buku</th>
+              <th>Kategori</th>
+              <th>Tgl Pinjam</th>
+              <th>Tgl Kembali</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>ANG-001</td>
+              <td>Budi Santoso</td>
+              <td>Laskar Pelangi</td>
+              <td>Fiksi</td>
+              <td>01-03-2026</td>
+              <td>08-03-2026</td>
+              <td>Dikembalikan</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>ANG-002</td>
+              <td>Siti Rahayu</td>
+              <td>Bumi Manusia</td>
+              <td>Fiksi</td>
+              <td>02-03-2026</td>
+              <td>09-03-2026</td>
+              <td>Dipinjam</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>ANG-003</td>
+              <td>Ahmad Fauzi</td>
+              <td>Sejarah Indonesia Modern</td>
+              <td>Sejarah</td>
+              <td>03-03-2026</td>
+              <td>10-03-2026</td>
+              <td>Dipinjam</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>ANG-004</td>
+              <td>Dewi Lestari</td>
+              <td>Pemrograman Web Dasar</td>
+              <td>Teknologi</td>
+              <td>04-03-2026</td>
+              <td>11-03-2026</td>
+              <td>Terlambat</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>ANG-005</td>
+              <td>Rizky Pratama</td>
+              <td>Fisika Untuk SMA</td>
+              <td>Ilmu Pengetahuan</td>
+              <td>05-03-2026</td>
+              <td>12-03-2026</td>
+              <td>Dipinjam</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+    <hr />
+
+    <aside id="statistik">
+      <h3>Statistik Perpustakaan</h3>
+      <p>Total Koleksi Buku: 1.250</p>
+      <p>Buku Dipinjam: 87</p>
+      <p>Buku Tersedia: 1.163</p>
+      <p>Anggota Aktif: 342</p>
+      <p>Peminjaman Terlambat: 5</p>
+    </aside>
+
+    <hr />
+
+    <footer>
+      <p>© 2026 | Sistem Informasi Perpustakaan | Chelsea Brilliant</p>
+    </footer>
+
+  </body>
+</html>
