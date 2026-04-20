@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistem Informasi Perpustakaan</title>
+    <title>Beranda — Sistem Informasi Perpustakaan</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -18,220 +18,81 @@
 
     <nav>
       <ul>
-        <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#peminjaman">Peminjaman Buku</a></li>
-        <li><a href="#pengembalian">Pengembalian Buku</a></li>
-        <li><a href="#daftar-buku">Daftar Buku</a></li>
-        <li><a href="#statistik">Statistik</a></li>
+        <li><a href="index.html" class="nav-active">Beranda</a></li>
+        <li><a href="peminjaman.html">Peminjaman Buku</a></li>
+        <li><a href="daftar.html">Daftar Buku</a></li>
+        <li><a class="nav-disabled">Pengembalian Buku</a></li>
+        <li><a class="nav-disabled">Statistik</a></li>
       </ul>
     </nav>
 
     <hr />
 
-    <main>
-
-      <!-- Form Peminjaman Buku -->
-      <section id="peminjaman">
-        <h2>Form Peminjaman Buku</h2>
-        <form action="#" method="POST" class="form-grid">
-
-        <div class="form-col">
-          <div class="form-group">
-            <label>ID Anggota:</label>
-            <input type="text">
-          </div>
-
-          <div class="form-group">
-            <label>Nama Peminjam:</label>
-            <input type="text">
-          </div>
-
-          <div class="form-group">
-            <label>Judul Buku:</label>
-            <input type="text">
-          </div>
-
-          <div class="form-group">
-            <label>Kode Buku:</label>
-            <input type="text">
-          </div>
-
-          <div class="form-group">
-            <label>Kategori Buku:</label>
-            <select></select>
-          </div>
-
-          <div class="form-group">
-            <label>Jumlah Buku:</label>
-            <input type="number">
+    <section id="beranda" class="beranda">
+      <div class="beranda-hero">
+        <div class="beranda-hero-content">
+          <div class="beranda-badge">📚 Sistem Informasi Perpustakaan</div>
+          <h2>Selamat Datang di<br/>Perpustakaan Digital</h2>
+          <p>Kelola peminjaman dan pengembalian buku dengan mudah, cepat, dan efisien. Semua data tercatat rapi dalam satu sistem.</p>
+          <div class="beranda-cta">
+            <a href="peminjaman.html" class="cta-btn cta-primary">📝 Form Peminjaman</a>
+            <a href="daftar.html" class="cta-btn cta-secondary">📋 Lihat Daftar</a>
           </div>
         </div>
-
-        <div class="form-col">
-          <div class="form-group">
-            <label>Tanggal Pinjam:</label>
-            <input type="date">
-          </div>
-
-          <div class="form-group">
-            <label>Tanggal Kembali:</label>
-            <input type="date">
-          </div>
-
-          <div class="form-group">
-            <label>Nama Petugas:</label>
-            <input type="text">
-          </div>
-
-          <div class="form-group">
-            <label>Keterangan:</label>
-            <textarea></textarea>
-          </div>
+        <div class="beranda-hero-art">
+          <div class="hero-book-icon">📚</div>
         </div>
-        
-        <div class="form-actions">
-          <button type="reset">Batal</button>
-          <button type="submit">Simpan</button>
-        </div>
-
-        </form>
-      </section>
-
-      <hr />
-
-      <!-- Daftar 5 Peminjaman Terakhir -->
-      <section id="daftar-buku">
-        <h2>Daftar 5 Peminjaman Terakhir</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>ID Anggota</th>
-              <th>Nama Peminjam</th>
-              <th>Judul Buku</th>
-              <th>Kategori</th>
-              <th>Tgl Pinjam</th>
-              <th>Tgl Kembali</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>ANG-001</td>
-              <td>Budi Santoso</td>
-              <td>Laskar Pelangi</td>
-              <td>Fiksi</td>
-              <td>01-03-2026</td>
-              <td>08-03-2026</td>
-              <td>Dikembalikan</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>ANG-002</td>
-              <td>Siti Rahayu</td>
-              <td>Bumi Manusia</td>
-              <td>Fiksi</td>
-              <td>02-03-2026</td>
-              <td>09-03-2026</td>
-              <td>Dipinjam</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>ANG-003</td>
-              <td>Ahmad Fauzi</td>
-              <td>Sejarah Indonesia Modern</td>
-              <td>Sejarah</td>
-              <td>03-03-2026</td>
-              <td>10-03-2026</td>
-              <td>Dipinjam</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>ANG-004</td>
-              <td>Dewi Lestari</td>
-              <td>Pemrograman Web Dasar</td>
-              <td>Teknologi</td>
-              <td>04-03-2026</td>
-              <td>11-03-2026</td>
-              <td>Terlambat</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>ANG-005</td>
-              <td>Rizky Pratama</td>
-              <td>Fisika Untuk SMA</td>
-              <td>Ilmu Pengetahuan</td>
-              <td>05-03-2026</td>
-              <td>12-03-2026</td>
-              <td>Dipinjam</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-    </main>
-
-    <hr />
-
-    <aside id="statistik">
-      <h3>Statistik Perpustakaan</h3>
-      <p>Total Koleksi Buku: 1.250</p>
-      <p>Buku Dipinjam: 87</p>
-      <p>Buku Tersedia: 1.163</p>
-      <p>Anggota Aktif: 342</p>
-      <p>Peminjaman Terlambat: 5</p>
-    </aside>
-
-    <div class="sidebar-filter">
-      <h4>Filter Kategori</h4>
-      <div class="checkbox-group">
-        <label class="checkbox-label">
-          <input type="checkbox" checked /> Fiksi
-          <span class="checkbox-count">380</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" checked /> Non-Fiksi
-          <span class="checkbox-count">320</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" /> Ilmu Pengetahuan
-          <span class="checkbox-count">195</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" /> Sejarah
-          <span class="checkbox-count">145</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" /> Teknologi
-          <span class="checkbox-count">210</span>
-        </label>
       </div>
-    </div>
 
-    <div class="sidebar-filter">
-      <h4>Filter Status Buku</h4>
-      <div class="checkbox-group">
-        <label class="checkbox-label">
-          <input type="checkbox" checked /> Tersedia
-          <span class="checkbox-count">1.163</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" checked /> Dipinjam
-          <span class="checkbox-count">87</span>
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" /> Terlambat
-          <span class="checkbox-count">5</span>
-        </label>
+      <div class="beranda-stats">
+        <div class="bstat-card">
+          <div class="bstat-icon">📖</div>
+          <div class="bstat-num" id="bstat-total">5</div>
+          <div class="bstat-label">Total Peminjaman</div>
+        </div>
+        <div class="bstat-card">
+          <div class="bstat-icon">🔄</div>
+          <div class="bstat-num" id="bstat-dipinjam">2</div>
+          <div class="bstat-label">Sedang Dipinjam</div>
+        </div>
+        <div class="bstat-card">
+          <div class="bstat-icon">✅</div>
+          <div class="bstat-num" id="bstat-kembali">1</div>
+          <div class="bstat-label">Dikembalikan</div>
+        </div>
+        <div class="bstat-card bstat-warn">
+          <div class="bstat-icon">⚠️</div>
+          <div class="bstat-num" id="bstat-terlambat">1</div>
+          <div class="bstat-label">Terlambat</div>
+        </div>
       </div>
-    </div>
 
-    <hr />
+      <div class="beranda-fitur">
+        <div class="fitur-card">
+          <div class="fitur-icon">📝</div>
+          <h3>Form Peminjaman</h3>
+          <p>Catat peminjaman buku dengan lengkap — ID anggota, judul, tanggal, dan petugas.</p>
+          <a href="peminjaman.html" class="fitur-link">Buka Form →</a>
+        </div>
+        <div class="fitur-card">
+          <div class="fitur-icon">📋</div>
+          <h3>Daftar Peminjaman</h3>
+          <p>Lihat seluruh riwayat peminjaman, edit data, atau hapus catatan yang tidak diperlukan.</p>
+          <a href="daftar.html" class="fitur-link">Lihat Daftar →</a>
+        </div>
+        <div class="fitur-card">
+          <div class="fitur-icon">🔍</div>
+          <h3>Pencarian & Filter</h3>
+          <p>Cari data peminjaman berdasarkan nama, judul, kode buku, atau filter per kategori.</p>
+          <a href="daftar.html" class="fitur-link">Cari Data →</a>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>© 2026 | Sistem Informasi Perpustakaan | Chelsea Brilliant</p>
     </footer>
 
+    <script src="script.js"></script>
   </body>
 </html>
