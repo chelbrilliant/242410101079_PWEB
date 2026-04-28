@@ -1,0 +1,126 @@
+@extends('layout')
+
+@section('title', 'Peminjaman Buku — Sistem Informasi Perpustakaan')
+
+@section('content')
+
+    <main>
+
+      <!-- Form Peminjaman Buku -->
+      <section id="peminjaman">
+        <h2>Form Peminjaman Buku</h2>
+        <form action="#" method="POST" class="form-grid">
+
+        <div class="form-col">
+          <div class="form-group">
+            <label>ID Anggota:</label>
+            <input type="text" id="id-anggota" name="id_anggota">
+          </div>
+
+          <div class="form-group">
+            <label>Nama Peminjam:</label>
+            <input type="text" id="nama-peminjam" name="nama_peminjam">
+          </div>
+
+          <div class="form-group">
+            <label>Judul Buku:</label>
+            <input type="text" id="judul-buku" name="judul_buku">
+          </div>
+
+          <div class="form-group">
+            <label>Kode Buku:</label>
+            <input type="text" id="kode-buku" name="kode_buku">
+          </div>
+
+          <div class="form-group">
+            <label>Kategori Buku:</label>
+            <select id="kategori-buku" name="kategori_buku">
+              <option value="">-- Pilih Kategori --</option>
+              <option value="Fiksi">Fiksi</option>
+              <option value="Non-Fiksi">Non-Fiksi</option>
+              <option value="Ilmu Pengetahuan">Ilmu Pengetahuan</option>
+              <option value="Sejarah">Sejarah</option>
+              <option value="Teknologi">Teknologi</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Jumlah Buku:</label>
+            <input type="number" id="jumlah-buku" name="jumlah_buku">
+          </div>
+        </div>
+
+        <div class="form-col">
+          <div class="form-group">
+            <label>Tanggal Pinjam:</label>
+            <input type="date" id="tanggal-pinjam" name="tanggal_pinjam">
+          </div>
+
+          <div class="form-group">
+            <label>Tanggal Kembali:</label>
+            <input type="date" id="tanggal-kembali" name="tanggal_kembali">
+          </div>
+
+          <div class="form-group">
+            <label>Nama Petugas:</label>
+            <input type="text" id="petugas" name="petugas">
+          </div>
+
+          <div class="form-group">
+            <label>Keterangan:</label>
+            <textarea id="keterangan" name="keterangan"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="reset">Batal</button>
+          <button type="submit">Simpan</button>
+        </div>
+
+        </form>
+      </section>
+
+    </main>
+
+    <div class="sidebar-wrap">
+
+      <aside id="statistik">
+        <h3>Statistik Perpustakaan</h3>
+        <p id="stat-total">Total Peminjaman: 5</p>
+        <p id="stat-dipinjam">Buku Dipinjam: 2</p>
+        <p id="stat-tersedia">Dikembalikan: 1</p>
+        <p>Anggota Aktif: 342</p>
+        <p id="stat-terlambat">Peminjaman Terlambat: 1</p>
+      </aside>
+
+      <div class="sidebar-filter filter-kategori">
+        <h4>Filter Kategori</h4>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" value="Fiksi" /> Fiksi
+            <span class="checkbox-count">380</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="Non-Fiksi" /> Non-Fiksi
+            <span class="checkbox-count">320</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="Ilmu Pengetahuan" /> Ilmu Pengetahuan
+            <span class="checkbox-count">195</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="Sejarah" /> Sejarah
+            <span class="checkbox-count">145</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="Teknologi" /> Teknologi
+            <span class="checkbox-count">210</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+@endsection
