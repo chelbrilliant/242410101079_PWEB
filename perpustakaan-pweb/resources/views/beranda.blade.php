@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Beranda — Sistem Informasi Perpustakaan')
 
@@ -66,3 +66,11 @@
     </section>
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Halaman Beranda loaded');
+});
+</script>
+@endpush

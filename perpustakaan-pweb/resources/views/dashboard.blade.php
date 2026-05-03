@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Dashboard — Sistem Informasi Perpustakaan')
 
@@ -21,53 +21,29 @@
         </div>
       </div>
 
-      <!-- Statistik Utama -->
+      {{-- Statistik menggunakan komponen x-stat-card - soal no.5 --}}
       <div class="beranda-stats">
-        <div class="bstat-card">
-          <div class="bstat-icon">📖</div>
-          <div class="bstat-num" id="bstat-total">5</div>
-          <div class="bstat-label">Total Peminjaman</div>
-        </div>
-        <div class="bstat-card">
-          <div class="bstat-icon">🔄</div>
-          <div class="bstat-num" id="bstat-dipinjam">2</div>
-          <div class="bstat-label">Sedang Dipinjam</div>
-        </div>
-        <div class="bstat-card">
-          <div class="bstat-icon">✅</div>
-          <div class="bstat-num" id="bstat-kembali">1</div>
-          <div class="bstat-label">Dikembalikan</div>
-        </div>
-        <div class="bstat-card bstat-warn">
-          <div class="bstat-icon">⚠️</div>
-          <div class="bstat-num" id="bstat-terlambat">1</div>
-          <div class="bstat-label">Terlambat</div>
-        </div>
+        <x-stat-card judul="Total Peminjaman" :nilai="$statistik[0]['nilai']" ikon="📖" />
+        <x-stat-card judul="Sedang Dipinjam"  :nilai="$statistik[1]['nilai']" ikon="🔄" />
+        <x-stat-card judul="Dikembalikan"     :nilai="$statistik[2]['nilai']" ikon="✅" warna="success" />
+        <x-stat-card judul="Terlambat"        :nilai="$statistik[3]['nilai']" ikon="⚠️" warna="warning" />
       </div>
 
-      <!-- Menu Fitur Admin -->
+      {{-- Menu Fitur Admin dengan @forelse - soal no.6 --}}
       <div class="beranda-fitur">
-        <div class="fitur-card">
-          <div class="fitur-icon">📝</div>
-          <h3>Manajemen Peminjaman</h3>
-          <p>Tambah, edit, dan hapus data peminjaman buku. Semua perubahan langsung tersimpan.</p>
-          <a href="{{ route('peminjaman') }}" class="fitur-link">Kelola Peminjaman →</a>
-        </div>
-        <div class="fitur-card">
-          <div class="fitur-icon">📋</div>
-          <h3>Daftar & Laporan</h3>
-          <p>Lihat seluruh riwayat peminjaman, filter per kategori atau status, dan cari data spesifik.</p>
-          <a href="{{ route('daftar') }}" class="fitur-link">Lihat Laporan →</a>
-        </div>
-        <div class="fitur-card">
-          <div class="fitur-icon">ℹ️</div>
-          <h3>Tentang Sistem</h3>
-          <p>Informasi mengenai Sistem Informasi Perpustakaan ini — fitur, teknologi, dan pengembang.</p>
-          <a href="{{ route('tentang') }}" class="fitur-link">Baca Selengkapnya →</a>
-        </div>
+        @forelse($menuAdmin as $menu)
+          <div class="fitur-card">
+            <div class="fitur-icon">{{ $menu['ikon'] }}</div>
+            <h3>{{ $menu['judul'] }}</h3>
+            <p>{{ $menu['deskripsi'] }}</p>
+            <a href="{{ route($menu['route']) }}" class="fitur-link">{{ $menu['label'] }} →</a>
+          </div>
+        @empty
+          <p>Menu tidak tersedia.</p>
+        @endforelse
       </div>
 
-      <!-- Tabel Peminjaman Terakhir -->
+      {{-- Tabel Peminjaman Terakhir --}}
       <div style="background:#fff; border-radius:12px; border:1px solid #d5e0ea; box-shadow:0 2px 8px rgba(27,79,114,0.08); overflow:hidden; margin-top:16px;">
         <h2 style="font-family:'Lora',serif; font-size:1.05rem; color:#fff; padding:16px 22px; margin:0; background:linear-gradient(135deg, #1b4f72 0%, #2e86c1 100%); border-bottom:3px solid #2ecc71;">
           📊 Data Peminjaman Terkini
@@ -84,7 +60,7 @@
               </tr>
             </thead>
             <tbody id="dashboard-tabel">
-              <!-- Di-render oleh script.js -->
+              {{-- Di-render oleh script.js --}}
             </tbody>
           </table>
         </div>
@@ -96,7 +72,6 @@
 
 @push('scripts')
 <script>
-// Render ringkasan tabel di dashboard
 document.addEventListener('DOMContentLoaded', () => {
   const tbody = document.getElementById('dashboard-tabel');
   if (!tbody) return;
