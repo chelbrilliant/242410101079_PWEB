@@ -22,7 +22,7 @@ class DashboardController extends Controller
                 'ikon'      => '📝',
                 'judul'     => 'Manajemen Peminjaman',
                 'deskripsi' => 'Tambah, edit, dan hapus data peminjaman buku. Semua perubahan langsung tersimpan.',
-                'route'     => 'peminjaman',
+                'route'     => 'peminjaman.index',
                 'label'     => 'Kelola Peminjaman',
             ],
             [

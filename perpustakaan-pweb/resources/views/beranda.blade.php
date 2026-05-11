@@ -11,7 +11,7 @@
           <h2>Selamat Datang di<br/>Perpustakaan Digital</h2>
           <p>Kelola peminjaman dan pengembalian buku dengan mudah, cepat, dan efisien. Semua data tercatat rapi dalam satu sistem.</p>
           <div class="beranda-cta">
-            <a href="{{ route('peminjaman') }}" class="cta-btn cta-primary">📝 Form Peminjaman</a>
+            <a href="{{ route('peminjaman.index') }}" class="cta-btn cta-primary">📝 Form Peminjaman</a>
             <a href="{{ route('daftar') }}" class="cta-btn cta-secondary">📋 Lihat Daftar</a>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="fitur-icon">📝</div>
           <h3>Form Peminjaman</h3>
           <p>Catat peminjaman buku dengan lengkap — ID anggota, judul, tanggal, dan petugas.</p>
-          <a href="{{ route('peminjaman') }}" class="fitur-link">Buka Form →</a>
+          <a href="{{ route('peminjaman.index') }}" class="fitur-link">Buka Form →</a>
         </div>
         <div class="fitur-card">
           <div class="fitur-icon">📋</div>

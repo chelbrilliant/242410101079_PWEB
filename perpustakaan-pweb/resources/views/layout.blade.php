@@ -23,7 +23,7 @@
     <nav>
       <ul>
         <li><a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'nav-active' : '' }}">Beranda</a></li>
-        <li><a href="{{ route('peminjaman') }}" class="{{ request()->routeIs('peminjaman') ? 'nav-active' : '' }}">Peminjaman Buku</a></li>
+        <li><a href="{{ route('peminjaman.index') }}" class="{{ request()->routeIs('peminjaman.index') ? 'nav-active' : '' }}">Peminjaman Buku</a></li>
         <li><a href="{{ route('daftar') }}" class="{{ request()->routeIs('daftar') ? 'nav-active' : '' }}">Daftar Buku</a></li>
         <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'nav-active' : '' }}">Dashboard</a></li>
         <li><a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'nav-active' : '' }}">Tentang</a></li>

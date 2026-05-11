@@ -13,7 +13,7 @@
           <p>Aplikasi web berbasis Laravel untuk membantu pengelolaan peminjaman dan pengembalian buku perpustakaan secara digital dan efisien.</p>
           <div class="beranda-cta">
             <a href="{{ route('beranda') }}" class="cta-btn cta-primary">🏠 Kembali ke Beranda</a>
-            <a href="{{ route('peminjaman') }}" class="cta-btn cta-secondary">📝 Mulai Peminjaman</a>
+            <a href="{{ route('peminjaman.index') }}" class="cta-btn cta-secondary">📝 Mulai Peminjaman</a>
           </div>
         </div>
         <div class="beranda-hero-art">
