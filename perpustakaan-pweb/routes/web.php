@@ -8,46 +8,45 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PreferensiController;
+use App\Http\Controllers\KunjunganController;
 
-// -------------------------------------------------------
-// Route publik — bisa diakses tanpa login
-// -------------------------------------------------------
+// ── Route publik ────────────────────────────────────────
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar');
 Route::get('/hitung/{a}/{b}', fn($a, $b) => $a + $b);
 
-// -------------------------------------------------------
-// Route yang membutuhkan login (middleware auth)
-// -------------------------------------------------------
+// ── SOAL 4 — Kunjungan (session counter, publik) ────────
+Route::get('/kunjungan', [KunjunganController::class, 'index'])->name('kunjungan');
+Route::post('/kunjungan/reset', [KunjunganController::class, 'reset'])->name('kunjungan.reset');
+
+// ── SOAL 3 — Preferensi / dark mode (publik) ────────────
+Route::get('/preferensi', [PreferensiController::class, 'index'])->name('preferensi');
+Route::post('/preferensi/simpan', [PreferensiController::class, 'simpan'])->name('preferensi.simpan');
+
+// ── Route yang butuh login ───────────────────────────────
 Route::middleware('auth')->group(function () {
 
-    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // AKTIVITAS 5 — CRUD Peminjaman, diamankan dengan middleware auth
-    // Soal 5 Aktivitas 6: Route::middleware('auth')->resource(...)
+    // CRUD Peminjaman
     Route::resource('peminjaman', PeminjamanController::class);
 
-    // Test flash message
+    // Live Search AJAX (butuh auth)
+    Route::get('/peminjaman-search', [PeminjamanController::class, 'search'])->name('peminjaman.search');
+
     Route::get('/test-flash', function () {
         return redirect()->route('dashboard')->with('success', 'Data berhasil disimpan!');
     });
 });
 
-// -------------------------------------------------------
-// Route khusus Admin (middleware auth + cek.admin)
-// -------------------------------------------------------
+// ── Route khusus Admin ───────────────────────────────────
 Route::middleware(['auth', 'cek.admin'])->group(function () {
-    // Contoh route khusus admin — statistik dan laporan
     Route::get('/admin/statistik', function () {
         return view('admin.statistik');
     })->name('admin.statistik');
 });
 
-// -------------------------------------------------------
-// Route Breeze (login, register, logout) — ditambah otomatis
-// setelah php artisan breeze:install blade
-// -------------------------------------------------------
 require __DIR__.'/auth.php';

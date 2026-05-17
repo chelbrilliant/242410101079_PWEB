@@ -25,6 +25,33 @@ class PeminjamanController extends Controller
         return view('peminjaman.index', compact('peminjaman'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword', '');
+
+        $query = Peminjaman::query();
+
+        if (auth()->user() && !auth()->user()->isAdmin()) {
+            $query->where('user_id', auth()->id());
+        }
+
+        $results = $query->where(function ($q) use ($keyword) {
+                $q->where('nama_peminjam', 'like', "%{$keyword}%")
+                  ->orWhere('judul_buku',   'like', "%{$keyword}%")
+                  ->orWhere('id_anggota',   'like', "%{$keyword}%");
+            })
+            ->latest()
+            ->take(20)
+            ->get(['id', 'id_anggota', 'nama_peminjam', 'judul_buku', 'status', 'tanggal_pinjam', 'foto']);
+
+        return response()->json([
+            'status'  => 'success',
+            'keyword' => $keyword,
+            'total'   => $results->count(),
+            'data'    => $results,
+        ]);
+    }
+
     /**
      * create() — tampilkan form tambah peminjaman
      */
