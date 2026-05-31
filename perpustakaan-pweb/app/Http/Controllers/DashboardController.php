@@ -2,45 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
+use App\Models\Peminjaman;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Data dummy statistik - digunakan oleh komponen x-stat-card
-        $statistik = [
-            ['judul' => 'Total Peminjaman', 'nilai' => 5,   'ikon' => '📖'],
-            ['judul' => 'Sedang Dipinjam',  'nilai' => 3,   'ikon' => '🔄'],
-            ['judul' => 'Dikembalikan',     'nilai' => 1,   'ikon' => '✅'],
-            ['judul' => 'Terlambat',        'nilai' => 1,   'ikon' => '⚠️'],
-        ];
+        $user = auth()->user();
 
-        // Data dummy menu admin - digunakan oleh @forelse
-        $menuAdmin = [
-            [
-                'ikon'      => '📝',
-                'judul'     => 'Manajemen Peminjaman',
-                'deskripsi' => 'Tambah, edit, dan hapus data peminjaman buku. Semua perubahan langsung tersimpan.',
-                'route'     => 'peminjaman.index',
-                'label'     => 'Kelola Peminjaman',
-            ],
-            [
-                'ikon'      => '📋',
-                'judul'     => 'Daftar & Laporan',
-                'deskripsi' => 'Lihat seluruh riwayat peminjaman, filter per kategori atau status, dan cari data spesifik.',
-                'route'     => 'daftar',
-                'label'     => 'Lihat Laporan',
-            ],
-            [
-                'ikon'      => 'ℹ️',
-                'judul'     => 'Tentang Sistem',
-                'deskripsi' => 'Informasi mengenai Sistem Informasi Perpustakaan — fitur, teknologi, dan pengembang.',
-                'route'     => 'tentang',
-                'label'     => 'Baca Selengkapnya',
-            ],
-        ];
+        // Auto-update status jadi Terlambat jika sudah lewat tanggal kembali
+        Peminjaman::where('status', 'Dipinjam')
+            ->whereNotNull('tanggal_kembali')
+            ->whereDate('tanggal_kembali', '<', now()->toDateString())
+            ->update(['status' => 'Terlambat']);
 
-        return view('dashboard', compact('statistik', 'menuAdmin'));
+        if ($user->isAdmin()) {
+            // Admin: lihat semua data
+            $statistik = [
+                ['judul' => 'Total Buku',       'nilai' => Buku::count(),                                       'ikon' => '📚', 'warna' => 'var(--primary)'],
+                ['judul' => 'Total Peminjaman', 'nilai' => Peminjaman::count(),                                 'ikon' => '📋', 'warna' => 'var(--primary-light)'],
+                ['judul' => 'Sedang Dipinjam',  'nilai' => Peminjaman::where('status', 'Dipinjam')->count(),    'ikon' => '🔄', 'warna' => 'var(--warning)'],
+                ['judul' => 'Terlambat',        'nilai' => Peminjaman::where('status', 'Terlambat')->count(),   'ikon' => '⚠️', 'warna' => 'var(--danger)'],
+                ['judul' => 'Dikembalikan',     'nilai' => Peminjaman::where('status', 'Dikembalikan')->count(),'ikon' => '✅', 'warna' => 'var(--success)'],
+                ['judul' => 'Total Customer',   'nilai' => User::where('role', 'customer')->count(),            'ikon' => '👤', 'warna' => 'var(--teal)'],
+            ];
+            $peminjamanTerbaru = Peminjaman::with(['user', 'buku'])->latest()->take(5)->get();
+            $bukuHabis         = Buku::where('stok', 0)->orWhere('tersedia', false)->count();
+
+        } else {
+            // Customer: lihat data milik sendiri saja
+            $milik = Peminjaman::where('user_id', $user->id);
+            $statistik = [
+                ['judul' => 'Total Peminjaman', 'nilai' => (clone $milik)->count(),                                 'ikon' => '📋', 'warna' => 'var(--primary)'],
+                ['judul' => 'Sedang Dipinjam',  'nilai' => (clone $milik)->where('status', 'Dipinjam')->count(),    'ikon' => '🔄', 'warna' => 'var(--warning)'],
+                ['judul' => 'Dikembalikan',     'nilai' => (clone $milik)->where('status', 'Dikembalikan')->count(),'ikon' => '✅', 'warna' => 'var(--success)'],
+                ['judul' => 'Terlambat',        'nilai' => (clone $milik)->where('status', 'Terlambat')->count(),   'ikon' => '⚠️', 'warna' => 'var(--danger)'],
+            ];
+            $peminjamanTerbaru = Peminjaman::where('user_id', $user->id)->with('buku')->latest()->take(5)->get();
+            $bukuHabis         = null;
+        }
+
+        return view('dashboard', compact('statistik', 'peminjamanTerbaru', 'bukuHabis'));
     }
 }

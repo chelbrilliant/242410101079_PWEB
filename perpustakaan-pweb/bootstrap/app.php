@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Daftarkan custom middleware CekAdmin dengan alias 'cek.admin'
+        // Daftarkan alias middleware CekAdmin
         $middleware->alias([
             'cek.admin' => \App\Http\Middleware\CekAdmin::class,
         ]);

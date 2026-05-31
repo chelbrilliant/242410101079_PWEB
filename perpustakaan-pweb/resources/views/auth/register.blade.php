@@ -1,92 +1,97 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register — Sistem Informasi Perpustakaan</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-  <style>
-    body { padding-top: 0; min-height: 100vh; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, #0f2e42 0%, #1b4f72 60%, #2e86c1 100%); }
-    .auth-card { background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 44px; width: 100%; max-width: 440px; }
-    .auth-logo { text-align:center; margin-bottom: 28px; }
-    .auth-logo h1 { font-family: 'Lora', serif; font-size: 1.4rem; color: #1b4f72; margin: 12px 0 4px; }
-    .auth-logo p { color: #5d7285; font-size: 0.85rem; margin: 0; }
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display:block; font-size:0.85rem; font-weight:600; color:#1a252f; margin-bottom:6px; }
-    .form-group input, .form-group select { width:100%; padding:11px 14px; border:1.5px solid #d5e0ea; border-radius:8px; font-size:0.9rem; font-family:'Plus Jakarta Sans',sans-serif; outline:none; transition:border 0.2s; box-sizing:border-box; background:white; }
-    .form-group input:focus, .form-group select:focus { border-color: #2e86c1; }
-    .btn-register { width:100%; padding:12px; background: linear-gradient(135deg, #27ae60, #2ecc71); color:white; border:none; border-radius:8px; font-size:0.95rem; font-weight:600; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; }
-    .btn-register:hover { opacity:0.9; }
-    .error-msg { color:#c0392b; font-size:0.8rem; margin-top:4px; }
-    .auth-footer { text-align:center; margin-top:20px; font-size:0.88rem; color:#5d7285; }
-    .auth-footer a { color:#2e86c1; font-weight:600; }
-  </style>
-</head>
-<body>
-  <div class="auth-card">
-    <div class="auth-logo">
-      <img src="{{ asset('images/logo.png') }}" width="60" onerror="this.style.display='none'" alt="Logo" />
-      <h1>Daftar Akun Baru</h1>
-      <p>Buat akun untuk mengakses sistem perpustakaan</p>
-    </div>
+@extends('layouts.guest')
+@section('title', 'Daftar — Perpustakaan UPA UNEJ')
 
-    <form method="POST" action="{{ route('register') }}">
-      @csrf
+@section('content')
+<div class="auth-card" style="background:white;border-radius:16px;padding:40px 44px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,0.25);">
 
-      <div class="form-group">
-        <label for="name">Nama Lengkap</label>
-        <input type="text" id="name" name="name" value="{{ old('name') }}"
-               placeholder="Nama lengkap kamu" required autofocus />
-        @error('name')
-          <p class="error-msg">{{ $message }}</p>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="email">Alamat Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}"
-               placeholder="contoh@email.com" required />
-        @error('email')
-          <p class="error-msg">{{ $message }}</p>
-        @enderror
-      </div>
-
-      {{-- Role --}}
-      <div class="form-group">
-        <label for="role">Role</label>
-        <select id="role" name="role" required>
-          <option value="petugas" {{ old('role') === 'petugas' ? 'selected' : '' }}>Petugas</option>
-          <option value="admin"   {{ old('role') === 'admin'   ? 'selected' : '' }}>Admin</option>
-        </select>
-        @error('role')
-          <p class="error-msg">{{ $message }}</p>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password"
-               placeholder="Minimal 8 karakter" required />
-        @error('password')
-          <p class="error-msg">{{ $message }}</p>
-        @enderror
-      </div>
-
-      <div class="form-group">
-        <label for="password_confirmation">Konfirmasi Password</label>
-        <input type="password" id="password_confirmation" name="password_confirmation"
-               placeholder="Ulangi password" required />
-      </div>
-
-      <button type="submit" class="btn-register">✅ Daftar Sekarang</button>
-    </form>
-
-    <div class="auth-footer">
-      Sudah punya akun?
-      <a href="{{ route('login') }}">Masuk di sini</a>
-    </div>
+  <div style="text-align:center;margin-bottom:28px;">
+    <h1 style="font-family:var(--font-display);font-size:1.5rem;color:var(--primary-dark);margin:0 0 6px;">Daftar Akun</h1>
+    <p style="color:var(--text-muted);font-size:0.875rem;margin:0;">Buat akun untuk meminjam buku</p>
   </div>
-</body>
-</html>
+
+  <form method="POST" action="{{ route('register') }}" id="registerForm" style="display:flex;flex-direction:column;gap:16px;">
+    @csrf
+
+    {{-- Nama --}}
+    <div>
+      <label style="display:block;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Nama Lengkap</label>
+      <input type="text" name="name" value="{{ old('name') }}" required
+             style="width:100%;padding:11px 14px;border:1.5px solid {{ $errors->has('name') ? 'var(--danger)' : 'var(--border)' }};border-radius:8px;font-size:0.9rem;font-family:var(--font-body);outline:none;" />
+      @error('name') <p style="color:var(--danger);font-size:0.78rem;margin-top:4px;">{{ $message }}</p> @enderror
+    </div>
+
+    {{-- Email --}}
+    <div>
+      <label style="display:block;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Email</label>
+      <input type="email" name="email" value="{{ old('email') }}" required
+             style="width:100%;padding:11px 14px;border:1.5px solid {{ $errors->has('email') ? 'var(--danger)' : 'var(--border)' }};border-radius:8px;font-size:0.9rem;font-family:var(--font-body);outline:none;" />
+      @error('email') <p style="color:var(--danger);font-size:0.78rem;margin-top:4px;">{{ $message }}</p> @enderror
+    </div>
+
+    {{-- Password --}}
+    <div>
+      <label style="display:block;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Password</label>
+      <input type="password" name="password" required id="pwInput"
+             style="width:100%;padding:11px 14px;border:1.5px solid {{ $errors->has('password') ? 'var(--danger)' : 'var(--border)' }};border-radius:8px;font-size:0.9rem;font-family:var(--font-body);outline:none;" />
+      @error('password') <p style="color:var(--danger);font-size:0.78rem;margin-top:4px;">{{ $message }}</p> @enderror
+    </div>
+
+    {{-- Konfirmasi Password --}}
+    <div>
+      <label style="display:block;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Konfirmasi Password</label>
+      <input type="password" name="password_confirmation" required id="pwConfirm"
+             style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.9rem;font-family:var(--font-body);outline:none;"
+             oninput="cekPassword()" />
+      <p id="pwMsg" style="font-size:0.78rem;margin-top:4px;display:none;"></p>
+    </div>
+
+    <button type="submit" id="regBtn"
+            style="width:100%;padding:13px;background:linear-gradient(135deg,var(--accent),var(--teal));color:white;border:none;border-radius:8px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:var(--font-body);">
+      Buat Akun
+    </button>
+  </form>
+
+  <p style="text-align:center;margin-top:20px;font-size:0.875rem;color:var(--text-muted);">
+    Sudah punya akun? <a href="{{ route('login') }}" style="color:var(--primary-light);font-weight:600;">Login</a>
+  </p>
+</div>
+
+<script>
+// Validasi real-time konfirmasi password — DOM manipulation
+function cekPassword() {
+  const pw1 = document.getElementById('pwInput').value;
+  const pw2 = document.getElementById('pwConfirm').value;
+  const msg = document.getElementById('pwMsg');
+  const conf = document.getElementById('pwConfirm');
+
+  if (pw2.length === 0) { msg.style.display = 'none'; return; }
+
+  if (pw1 === pw2) {
+    msg.style.display  = 'block';
+    msg.style.color    = 'var(--success)';
+    msg.textContent    = 'Password cocok';
+    conf.style.border  = '1.5px solid var(--success)';
+  } else {
+    msg.style.display  = 'block';
+    msg.style.color    = 'var(--danger)';
+    msg.textContent    = 'Password tidak cocok';
+    conf.style.border  = '1.5px solid var(--danger)';
+  }
+}
+
+// Validasi sebelum submit
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  const name = this.querySelector('[name="name"]').value.trim();
+  const pw1  = document.getElementById('pwInput').value;
+  const pw2  = document.getElementById('pwConfirm').value;
+  const btn  = document.getElementById('regBtn');
+
+  if (!name) { e.preventDefault(); alert('Nama lengkap wajib diisi!'); return; }
+  if (pw1 !== pw2) { e.preventDefault(); alert('Password dan konfirmasi password tidak cocok!'); return; }
+  if (pw1.length < 8) { e.preventDefault(); alert('Password minimal 8 karakter!'); return; }
+
+  btn.textContent = 'Membuat akun...';
+  btn.disabled    = true;
+});
+</script>
+@endsection

@@ -12,31 +12,25 @@ class Buku extends Model
     protected $table = 'buku';
 
     protected $fillable = [
-        'kode_buku',
-        'judul',
-        'pengarang',
-        'kategori',
-        'tahun_terbit',
-        'stok',
-        'tersedia',
-        'foto',
+        'kode_buku', 'judul', 'pengarang',
+        'kategori', 'tahun_terbit', 'stok', 'tersedia',
     ];
 
     protected $casts = [
-        'tersedia'      => 'boolean',
-        'tahun_terbit'  => 'integer',
-        'stok'          => 'integer',
+        'tersedia'     => 'boolean',
+        'tahun_terbit' => 'integer',
+        'stok'         => 'integer',
     ];
 
-    // Local Scope: buku yang tersedia
+    // Scope buku yang masih bisa dipinjam
     public function scopeTersedia($query)
     {
-        return $query->where('tersedia', true);
+        return $query->where('tersedia', true)->where('stok', '>', 0);
     }
 
-    // Relasi belongsToMany ke Peminjaman
+    // Relasi ke peminjaman
     public function peminjaman()
     {
-        return $this->belongsToMany(Peminjaman::class, 'peminjaman_buku', 'buku_id', 'peminjaman_id');
+        return $this->hasMany(Peminjaman::class);
     }
 }
