@@ -14,7 +14,6 @@ return new class extends Migration
             $table->boolean('denda_dibayar')->default(false)->after('denda');
             // Tambah foreign key ke tabel buku dan users
             $table->unsignedBigInteger('buku_id')->nullable()->after('id');
-            $table->unsignedBigInteger('user_id')->nullable()->after('buku_id');
         });
     }
 
