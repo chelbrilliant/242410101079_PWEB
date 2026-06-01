@@ -161,7 +161,7 @@ async function doSearch(keyword) {
     status.textContent    = `Ditemukan ${json.total} hasil untuk "${json.keyword}"`;
 
     if (json.data.length === 0) {
-      results.innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-muted);">📭 Tidak ada data yang cocok dengan "<strong>${keyword}</strong>"</div>`;
+      results.innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-muted);">Tidak ada data yang cocok dengan "<strong>${keyword}</strong>"</div>`;
       return;
     }
 
