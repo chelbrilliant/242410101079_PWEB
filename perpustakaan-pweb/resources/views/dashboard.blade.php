@@ -135,19 +135,19 @@
         <div class="fitur-icon">📚</div>
         <h3>Kelola Buku</h3>
         <p>Tambah, edit, dan hapus koleksi buku perpustakaan.</p>
-        <a href="{{ route('buku.index') }}" class="fitur-link">Kelola Buku →</a>
+        <a href="{{ route('buku.index') }}" class="fitur-link">Kelola Buku</a>
       </div>
       <div class="fitur-card">
         <div class="fitur-icon">📋</div>
         <h3>Semua Peminjaman</h3>
         <p>Lihat dan kelola semua data peminjaman dari seluruh customer.</p>
-        <a href="{{ route('peminjaman.index') }}" class="fitur-link">Lihat Semua →</a>
+        <a href="{{ route('peminjaman.index') }}" class="fitur-link">Lihat Semua</a>
       </div>
       <div class="fitur-card">
         <div class="fitur-icon">🔄</div>
         <h3>Kelola Pengembalian</h3>
         <p>Proses pengembalian buku dan tandai denda yang sudah dibayar.</p>
-        <a href="{{ route('pengembalian.index') }}" class="fitur-link">Kelola Pengembalian →</a>
+        <a href="{{ route('pengembalian.index') }}" class="fitur-link">Kelola Pengembalian</a>
       </div>
     </div>
   </div>

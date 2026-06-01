@@ -197,7 +197,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
   const bukuId = document.getElementById('bukuId').value;
   const btn    = document.getElementById('submitBtn');
   if (!bukuId) { e.preventDefault(); alert('Pilih buku terlebih dahulu!'); return; }
-  btn.textContent = '⏳ Menyimpan...';
+  btn.textContent = 'Menyimpan...';
   btn.disabled    = true;
 });
 </script>

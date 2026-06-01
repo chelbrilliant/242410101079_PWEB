@@ -93,16 +93,16 @@
         <div class="fitur-icon">📚</div>
         <h3>Koleksi Buku</h3>
         <p>Lihat seluruh koleksi buku yang tersedia di perpustakaan UPA UNEJ.</p>
-        <a href="{{ route('buku.index') }}" class="fitur-link">Lihat Koleksi →</a>
+        <a href="{{ route('buku.index') }}" class="fitur-link">Lihat Koleksi</a>
       </div>
       <div class="fitur-card">
         <div class="fitur-icon">📝</div>
         <h3>Peminjaman Buku</h3>
         <p>Ajukan peminjaman buku dengan mudah. Pilih buku, tentukan tanggal, dan selesai.</p>
         @auth
-          <a href="{{ route('peminjaman.create') }}" class="fitur-link">Pinjam Sekarang →</a>
+          <a href="{{ route('peminjaman.create') }}" class="fitur-link">Pinjam Sekarang</a>
         @else
-          <a href="{{ route('login') }}" class="fitur-link">Login untuk Meminjam →</a>
+          <a href="{{ route('login') }}" class="fitur-link">Login untuk Meminjam</a>
         @endauth
       </div>
       <div class="fitur-card">
@@ -110,9 +110,9 @@
         <h3>Pengembalian Buku</h3>
         <p>Kembalikan buku tepat waktu. Sistem otomatis menghitung denda jika terlambat.</p>
         @auth
-          <a href="{{ route('pengembalian.index') }}" class="fitur-link">Kelola Pengembalian →</a>
+          <a href="{{ route('pengembalian.index') }}" class="fitur-link">Kelola Pengembalian</a>
         @else
-          <a href="{{ route('login') }}" class="fitur-link">Login untuk Mengembalikan →</a>
+          <a href="{{ route('login') }}" class="fitur-link">Login untuk Mengembalikan</a>
         @endauth
       </div>
     </div>
@@ -177,7 +177,7 @@ async function doSearch(keyword) {
           <span style="padding:3px 10px;border-radius:20px;font-size:0.78rem;font-weight:600;${badgeStyle[item.status]||''}">${item.status}</span>
         </td>
         <td style="padding:10px 14px;">
-          <a href="/peminjaman/${item.id}" style="font-size:0.8rem;color:var(--primary-light);font-weight:600;">Lihat →</a>
+          <a href="/peminjaman/${item.id}" style="font-size:0.8rem;color:var(--primary-light);font-weight:600;">Lihat</a>
         </td>
       </tr>`).join('');
 
