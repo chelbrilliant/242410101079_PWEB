@@ -164,8 +164,8 @@ function cariBuku(keyword) {
   bukuTimeout = setTimeout(async () => {
     loading.style.display = 'block';
     try {
-      const res  = await fetch(`/buku-cari?keyword=${encodeURIComponent(keyword)}`, {
-        headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
+      const res  = await fetch(`/buku-cari?keyword=${encodeURIComponent(keyword)}`, { // kirim keyword ke server
+        headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content } // request JSON + keamanan Laravel
       });
       const json = await res.json();
       loading.style.display = 'none';

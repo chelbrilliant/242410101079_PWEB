@@ -124,19 +124,19 @@
 @push('scripts')
 <script>
 // Live Search AJAX — kirim GET ke /peminjaman-search
-let searchTimeout = null;
+let searchTimeout = null; //simpan timer
 
 function liveSearch(keyword) {
-  clearTimeout(searchTimeout);
+  clearTimeout(searchTimeout); //hapus timer
   searchTimeout = setTimeout(() => doSearch(keyword), 400); // debounce 400ms
 }
 
-async function doSearch(keyword) {
+async function doSearch(keyword) { //komunikasi server
   const status  = document.getElementById('searchStatus');
   const loading = document.getElementById('searchLoading');
   const results = document.getElementById('searchResults');
 
-  if (!keyword.trim()) {
+  if (!keyword.trim()) { // validasi input kosong
     results.innerHTML = '';
     status.style.display = 'none';
     return;
@@ -146,16 +146,16 @@ async function doSearch(keyword) {
   results.innerHTML = '';
   status.style.display = 'none';
 
-  try {
-    const response = await fetch(`/peminjaman-search?keyword=${encodeURIComponent(keyword)}`, {
+  try { //coba jalankan request AJAX
+    const response = await fetch(`/peminjaman-search?keyword=${encodeURIComponent(keyword)}`, { // req data tanpa refresh, kirim GET ke server
       method: 'GET',
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        'Accept': 'application/json',
+        'Accept': 'application/json', // minta response JSON
       }
     });
 
-    const json = await response.json();
+    const json = await response.json(); //ubah jadi json
     loading.style.display = 'none';
     status.style.display  = 'block';
     status.textContent    = `Ditemukan ${json.total} hasil untuk "${json.keyword}"`;

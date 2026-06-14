@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
         // Simpan nama ke cookie 30 hari untuk "Selamat datang kembali"
         $cookie = cookie('last_user_name', auth()->user()->name, 60 * 24 * 30);
 
-        return redirect()->intended(route('dashboard'))->withCookie($cookie);
+        return redirect()->intended(route('dashboard'))->withCookie($cookie); // kirim cookie & masuk dashboard
     }
 
     public function destroy(Request $request): RedirectResponse

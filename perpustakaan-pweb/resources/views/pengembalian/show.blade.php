@@ -121,12 +121,12 @@
 <script>
 // Aktifkan tombol konfirmasi hanya jika semua checkbox dicentang — DOM manipulation
 function cekSemua() {
-  const cek1  = document.getElementById('cek1').checked;
+  const cek1  = document.getElementById('cek1').checked; // ambil status checkbox
   const cek2  = document.getElementById('cek2').checked;
   const cek3  = document.getElementById('cek3'); // null jika tidak ada denda
   const btn   = document.getElementById('btnKonfirmasi');
 
-  const semua = cek3 ? (cek1 && cek2 && cek3.checked) : (cek1 && cek2);
+  const semua = cek3 ? (cek1 && cek2 && cek3.checked) : (cek1 && cek2); //cek semua
 
   if (semua) {
     btn.disabled          = false;
@@ -140,13 +140,13 @@ function cekSemua() {
 }
 
 // Konfirmasi akhir sebelum submit
-document.getElementById('pengembalianForm').addEventListener('submit', function(e) {
+document.getElementById('pengembalianForm').addEventListener('submit', function(e) { // event saat form dikirim
   const denda = {{ $denda }};
   let pesan   = 'Konfirmasi pengembalian buku "{{ $peminjaman->judul_buku }}"?';
   if (denda > 0) {
-    pesan += '\n\nDenda: Rp {{ number_format($denda, 0, ',', '.') }} (dibayar ke petugas).';
+    pesan += '\n\nDenda: Rp {{ number_format($denda, 0, ',', '.') }} (dibayar ke petugas).'; // tambah info denda
   }
-  if (!confirm(pesan)) {
+  if (!confirm(pesan)) { //pop up
     e.preventDefault();
     return;
   }
@@ -159,17 +159,17 @@ document.getElementById('pengembalianForm').addEventListener('submit', function(
 @if($keterlambatan > 0)
 async function refreshDenda() {
   try {
-    const res  = await fetch('/pengembalian/{{ $peminjaman->id }}/cek', {
+    const res  = await fetch('/pengembalian/{{ $peminjaman->id }}/cek', { // kirim GET ke server
       headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
     });
-    const json = await res.json();
+    const json = await res.json(); // ubah response jadi JSON
     const hEl  = document.getElementById('hariTerlambat');
     const dEl  = document.getElementById('jumlahDenda');
-    if (hEl) hEl.textContent = json.keterlambatan;
+    if (hEl) hEl.textContent = json.keterlambatan; // update hari terlambat
     if (dEl) dEl.textContent = json.denda_format;
   } catch(e) {}
 }
-setInterval(refreshDenda, 30000);
+setInterval(refreshDenda, 30000); //30detik
 @endif
 </script>
 @endpush
